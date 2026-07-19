@@ -67,10 +67,6 @@ export function LoginForm() {
           Créer un compte
         </Link>
       </p>
-
-      <div className="mt-6 rounded-xl bg-nude-50 p-3 text-xs text-ink-500">
-        Démo : cliente — 78 123 45 67 / cliente123 · admin — 77 000 00 00 / admin123
-      </div>
     </>
   );
 }
