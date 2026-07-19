@@ -2,8 +2,8 @@ import { Sparkles, ShieldCheck, MapPin, CalendarCheck } from "lucide-react";
 import { LinkButton } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { WhatsAppButton } from "@/components/shared/WhatsAppButton";
+import { Hero } from "@/components/home/Hero";
 import { HomeDynamicSections } from "@/components/home/HomeDynamicSections";
-import { BRAND } from "@/lib/config";
 
 const REASSURANCES = [
   { icon: ShieldCheck, title: "Validation soignée", text: "Chaque rendez-vous est vérifié par notre équipe avant confirmation." },
@@ -15,21 +15,7 @@ const REASSURANCES = [
 export default function HomePage() {
   return (
     <>
-      <section className="relative overflow-hidden bg-gradient-to-b from-blush-100 via-nude-50 to-cream">
-        <Container className="relative flex flex-col items-center gap-6 py-24 text-center sm:py-32">
-          <span className="animate-fade-up rounded-full border border-gold-400/50 bg-white/60 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.25em] text-gold-600">
-            {BRAND.studioName}
-          </span>
-          <h1 className="animate-fade-up font-display text-4xl leading-tight text-ink-900 sm:text-6xl">
-            {BRAND.tagline}
-          </h1>
-          <p className="max-w-xl animate-fade-up text-balance text-ink-500 sm:text-lg">{BRAND.description}</p>
-          <div className="flex animate-fade-up flex-wrap items-center justify-center gap-3 pt-2">
-            <LinkButton href="/services" variant="primary" size="lg">Réserver une prestation</LinkButton>
-            <LinkButton href="/boutique" variant="outline" size="lg">Découvrir la boutique</LinkButton>
-          </div>
-        </Container>
-      </section>
+      <Hero />
 
       <HomeDynamicSections />
 
