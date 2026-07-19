@@ -3,12 +3,15 @@ import { LinkButton } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { BRAND } from "@/lib/config";
 
-const HERO_IMAGE = "/hero-salon.png";
+const HERO_IMAGE_DESKTOP = "/hero-salon.png";
+const HERO_IMAGE_MOBILE =
+  "https://res.cloudinary.com/dvratnou1/image/upload/v1784474084/zh4vmmfdrqyajf0uebqt.jpg";
 
 export function Hero() {
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-blush-200 via-nude-100 to-cream">
-      <Image src={HERO_IMAGE} alt="" fill priority className="object-cover" />
+      <Image src={HERO_IMAGE_MOBILE} alt="" fill priority className="object-cover sm:hidden" />
+      <Image src={HERO_IMAGE_DESKTOP} alt="" fill priority className="hidden object-cover sm:block" />
       <div className="absolute inset-0 bg-gradient-to-b from-ink-900/50 via-ink-900/10 to-cream" />
 
       <Container className="relative flex flex-col items-center gap-6 py-24 text-center sm:py-32">
