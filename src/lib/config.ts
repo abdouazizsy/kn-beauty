@@ -2,10 +2,10 @@ export const BRAND = {
   name: "KN Beauty Studio",
   tagline: "L'élégance, révélée.",
   description:
-    "Institut de beauté moderne à Dakar : maquillage professionnel, coiffure, onglerie et boutique beauté. Réservez votre expérience premium en quelques clics.",
+    "Institut de beauté moderne à Tivaouane : maquillage professionnel, coiffure, onglerie et boutique beauté. Réservez votre expérience premium en quelques clics.",
   whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "221771830493",
   instagram: process.env.NEXT_PUBLIC_INSTAGRAM_URL || "https://instagram.com",
-  address: "Dakar, Sénégal",
+  address: "Tivaouane, quartier Darou Salam, Sénégal",
   studioName: "Studio KN Beauty",
 };
 

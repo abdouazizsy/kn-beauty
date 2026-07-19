@@ -1,18 +1,9 @@
-import Link from "next/link";
 import { Sparkles, ShieldCheck, MapPin, CalendarCheck } from "lucide-react";
 import { LinkButton } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { CategoryArt } from "@/components/ui/CategoryArt";
 import { WhatsAppButton } from "@/components/shared/WhatsAppButton";
 import { HomeDynamicSections } from "@/components/home/HomeDynamicSections";
 import { BRAND } from "@/lib/config";
-
-const UNIVERSES = [
-  { category: "maquillage" as const, title: "Maquillage", href: "/services?category=maquillage" },
-  { category: "coiffure" as const, title: "Coiffure", href: "/services?category=coiffure" },
-  { category: "onglerie" as const, title: "Onglerie", href: "/services?category=onglerie" },
-  { category: "pyjamas" as const, title: "Boutique", href: "/boutique" },
-];
 
 const REASSURANCES = [
   { icon: ShieldCheck, title: "Validation soignée", text: "Chaque rendez-vous est vérifié par notre équipe avant confirmation." },
@@ -36,16 +27,6 @@ export default function HomePage() {
           <div className="flex animate-fade-up flex-wrap items-center justify-center gap-3 pt-2">
             <LinkButton href="/services" variant="primary" size="lg">Réserver une prestation</LinkButton>
             <LinkButton href="/boutique" variant="outline" size="lg">Découvrir la boutique</LinkButton>
-          </div>
-        </Container>
-      </section>
-
-      <section className="py-16">
-        <Container>
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-            {UNIVERSES.map((u) => (
-              <LinkUniverse key={u.title} {...u} />
-            ))}
           </div>
         </Container>
       </section>
@@ -79,16 +60,5 @@ export default function HomePage() {
         </Container>
       </section>
     </>
-  );
-}
-
-function LinkUniverse({ category, title, href }: { category: (typeof UNIVERSES)[number]["category"]; title: string; href: string }) {
-  return (
-    <Link href={href} className="group relative aspect-square overflow-hidden rounded-2xl">
-      <CategoryArt category={category} className="transition-transform duration-500 group-hover:scale-110" />
-      <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink-900/70 to-transparent p-4 font-display text-lg text-white">
-        {title}
-      </span>
-    </Link>
   );
 }
