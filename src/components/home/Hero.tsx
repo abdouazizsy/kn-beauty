@@ -4,8 +4,7 @@ import { Container } from "@/components/ui/Container";
 import { BRAND } from "@/lib/config";
 
 const HERO_IMAGE_DESKTOP = "/hero-salon.png";
-const HERO_IMAGE_MOBILE =
-  "https://res.cloudinary.com/dvratnou1/image/upload/v1784474084/zh4vmmfdrqyajf0uebqt.jpg";
+const HERO_IMAGE_MOBILE = "/hero-mobile.png";
 
 export function Hero() {
   return (
