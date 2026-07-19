@@ -1,26 +1,86 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-cream: #faf6f1;
+  --color-nude-50: #fbf7f3;
+  --color-nude-100: #f4e9df;
+  --color-nude-200: #ecdac8;
+  --color-nude-300: #ddc0a3;
+  --color-nude-400: #cba17b;
+  --color-nude-500: #b7845c;
+  --color-blush-50: #fdf3f4;
+  --color-blush-100: #f9e2e6;
+  --color-blush-200: #f3c6ce;
+  --color-blush-300: #e9a3b0;
+  --color-blush-400: #d97e8f;
+  --color-blush-500: #c05a70;
+  --color-gold-300: #e9cf9a;
+  --color-gold-400: #d4af6a;
+  --color-gold-500: #b8912f;
+  --color-gold-600: #96731f;
+  --color-ink-900: #241c19;
+  --color-ink-700: #423531;
+  --color-ink-500: #756259;
+
+  --background: var(--color-cream);
+  --foreground: var(--color-ink-900);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-cream: var(--color-cream);
+  --color-nude-50: var(--color-nude-50);
+  --color-nude-100: var(--color-nude-100);
+  --color-nude-200: var(--color-nude-200);
+  --color-nude-300: var(--color-nude-300);
+  --color-nude-400: var(--color-nude-400);
+  --color-nude-500: var(--color-nude-500);
+  --color-blush-50: var(--color-blush-50);
+  --color-blush-100: var(--color-blush-100);
+  --color-blush-200: var(--color-blush-200);
+  --color-blush-300: var(--color-blush-300);
+  --color-blush-400: var(--color-blush-400);
+  --color-blush-500: var(--color-blush-500);
+  --color-gold-300: var(--color-gold-300);
+  --color-gold-400: var(--color-gold-400);
+  --color-gold-500: var(--color-gold-500);
+  --color-gold-600: var(--color-gold-600);
+  --color-ink-900: var(--color-ink-900);
+  --color-ink-700: var(--color-ink-700);
+  --color-ink-500: var(--color-ink-500);
+
+  --font-serif-display: var(--font-playfair);
+  --font-sans: var(--font-poppins);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+::selection {
+  background: var(--color-gold-300);
+  color: var(--color-ink-900);
+}
+
+.font-display {
+  font-family: var(--font-serif-display), Georgia, serif;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.6s ease-out both;
 }
