@@ -4,6 +4,7 @@ import type { GalleryItem } from "@/types/gallery";
 import type { AppUser } from "@/types/user";
 import type { Appointment } from "@/types/appointment";
 import type { Order } from "@/types/order";
+import type { Transaction } from "@/types/transaction";
 
 const iso = (daysFromNow: number) => {
   const d = new Date();
@@ -353,5 +354,16 @@ export const SEED_ORDERS: Order[] = [
     district: "Sacré-Cœur",
     status: "PREPARING",
     createdAt: iso(-3),
+  },
+];
+
+export const SEED_TRANSACTIONS: Transaction[] = [
+  {
+    id: "txn-1",
+    description: "Maquillage soirée",
+    clientName: "Cliente de passage",
+    amount: 15000,
+    method: "especes",
+    createdAt: iso(-1),
   },
 ];

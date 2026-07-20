@@ -71,5 +71,10 @@ service cloud.firestore {
       allow update: if isAdmin();
       allow delete: if isAdmin();
     }
+
+    // --- transactions (cash register, admin only) -------------------------------
+    match /transactions/{transactionId} {
+      allow read, write: if isAdmin();
+    }
   }
 }

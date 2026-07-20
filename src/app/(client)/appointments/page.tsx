@@ -57,9 +57,11 @@ export default function AppointmentsPage() {
                     Acompte : <strong>{formatFCFA(apt.depositAmount)}</strong>{" "}
                     {apt.depositStatus === "RECEIVED" ? "(reçu)" : "(à envoyer)"}
                   </span>
-                  <span className="text-sm text-ink-500">
-                    Reste à payer : <strong className="text-ink-700">{formatFCFA(apt.servicePrice - apt.depositAmount)}</strong>
-                  </span>
+                  {!(apt.status === "COMPLETED" && apt.servicePrice - apt.depositAmount <= 0) && (
+                    <span className="text-sm text-ink-500">
+                      Reste à payer : <strong className="text-ink-700">{formatFCFA(apt.servicePrice - apt.depositAmount)}</strong>
+                    </span>
+                  )}
                 </div>
               </div>
             </div>

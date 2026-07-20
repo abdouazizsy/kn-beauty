@@ -11,6 +11,7 @@ import {
   CalendarCheck,
   Users,
   Images,
+  Wallet,
   LogOut,
   Menu,
   X,
@@ -25,6 +26,7 @@ const LINKS = [
   { href: "/admin/services", label: "Services", icon: Sparkles },
   { href: "/admin/orders", label: "Commandes", icon: ClipboardList },
   { href: "/admin/appointments", label: "Rendez-vous", icon: CalendarCheck },
+  { href: "/admin/caisse", label: "Caisse", icon: Wallet },
   { href: "/admin/gallery", label: "Galerie", icon: Images },
   { href: "/admin/customers", label: "Clientes", icon: Users },
 ];

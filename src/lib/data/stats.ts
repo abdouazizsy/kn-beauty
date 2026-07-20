@@ -1,6 +1,7 @@
 import { listOrders } from "./orders";
 import { listAppointments } from "./appointments";
 import { listCustomers } from "./customers";
+import { listTransactions } from "./transactions";
 import type { Order } from "@/types/order";
 import type { Appointment } from "@/types/appointment";
 
@@ -34,22 +35,25 @@ function revenueFromOrder(order: Order) {
 }
 
 export async function getDashboardStats(): Promise<DashboardStats> {
-  const [orders, appointments, customers] = await Promise.all([
+  const [orders, appointments, customers, transactions] = await Promise.all([
     listOrders(),
     listAppointments(),
     listCustomers(),
+    listTransactions(),
   ]);
 
   const now = new Date();
   const totalRevenue =
     orders.reduce((s, o) => s + revenueFromOrder(o), 0) +
-    appointments.filter((a) => a.status === "COMPLETED").reduce((s, a) => s + a.servicePrice, 0);
+    appointments.filter((a) => a.status === "COMPLETED").reduce((s, a) => s + a.servicePrice, 0) +
+    transactions.reduce((s, t) => s + t.amount, 0);
 
   const monthlyRevenue =
     orders.filter((o) => isSameMonth(o.createdAt, now)).reduce((s, o) => s + revenueFromOrder(o), 0) +
     appointments
       .filter((a) => a.status === "COMPLETED" && isSameMonth(a.createdAt, now))
-      .reduce((s, a) => s + a.servicePrice, 0);
+      .reduce((s, a) => s + a.servicePrice, 0) +
+    transactions.filter((t) => isSameMonth(t.createdAt, now)).reduce((s, t) => s + t.amount, 0);
 
   const productQty = new Map<string, number>();
   orders.forEach((o) =>
@@ -85,9 +89,9 @@ export async function getDashboardStats(): Promise<DashboardStats> {
   const monthlySeries: MonthlyPoint[] = Array.from({ length: 6 }).map((_, idx) => {
     const ref = new Date(now.getFullYear(), now.getMonth() - (5 - idx), 1);
     const label = ref.toLocaleDateString("fr-FR", { month: "short" });
-    const revenue = orders
-      .filter((o) => isSameMonth(o.createdAt, ref))
-      .reduce((s, o) => s + revenueFromOrder(o), 0);
+    const revenue =
+      orders.filter((o) => isSameMonth(o.createdAt, ref)).reduce((s, o) => s + revenueFromOrder(o), 0) +
+      transactions.filter((t) => isSameMonth(t.createdAt, ref)).reduce((s, t) => s + t.amount, 0);
     const appts = appointments.filter((a) => isSameMonth(a.createdAt, ref)).length;
     return { label, revenue, appointments: appts };
   });

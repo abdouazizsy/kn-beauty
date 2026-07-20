@@ -6,6 +6,7 @@ import type { GalleryItem } from "@/types/gallery";
 import type { AppUser } from "@/types/user";
 import type { Appointment } from "@/types/appointment";
 import type { Order } from "@/types/order";
+import type { Transaction } from "@/types/transaction";
 import {
   SEED_SERVICES,
   SEED_PRODUCTS,
@@ -13,6 +14,7 @@ import {
   SEED_USERS,
   SEED_APPOINTMENTS,
   SEED_ORDERS,
+  SEED_TRANSACTIONS,
 } from "./seed-data";
 
 interface MockAuthCredential {
@@ -27,6 +29,7 @@ interface MockState {
   users: AppUser[];
   appointments: Appointment[];
   orders: Order[];
+  transactions: Transaction[];
   credentials: MockAuthCredential[];
   currentUserId: string | null;
   hasHydrated: boolean;
@@ -52,6 +55,9 @@ interface MockState {
   addOrder: (order: Order) => void;
   updateOrder: (id: string, patch: Partial<Order>) => void;
 
+  addTransaction: (transaction: Transaction) => void;
+  deleteTransaction: (id: string) => void;
+
   addGalleryItem: (item: GalleryItem) => void;
   updateGalleryItem: (id: string, patch: Partial<GalleryItem>) => void;
   deleteGalleryItem: (id: string) => void;
@@ -66,6 +72,7 @@ export const useMockStore = create<MockState>()(
       users: SEED_USERS,
       appointments: SEED_APPOINTMENTS,
       orders: SEED_ORDERS,
+      transactions: SEED_TRANSACTIONS,
       credentials: [
         { userId: "admin-demo", password: "admin123" },
         { userId: "cliente-demo", password: "cliente123" },
@@ -116,6 +123,10 @@ export const useMockStore = create<MockState>()(
       addOrder: (order) => set((s) => ({ orders: [order, ...s.orders] })),
       updateOrder: (id, patch) =>
         set((s) => ({ orders: s.orders.map((o) => (o.id === id ? { ...o, ...patch } : o)) })),
+
+      addTransaction: (transaction) => set((s) => ({ transactions: [transaction, ...s.transactions] })),
+      deleteTransaction: (id) =>
+        set((s) => ({ transactions: s.transactions.filter((t) => t.id !== id) })),
 
       addGalleryItem: (item) => set((s) => ({ gallery: [item, ...s.gallery] })),
       updateGalleryItem: (id, patch) =>

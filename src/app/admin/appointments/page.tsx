@@ -51,6 +51,16 @@ export default function AdminAppointmentsPage() {
   }
 
   async function markCompleted(apt: Appointment) {
+    const remaining = apt.servicePrice - apt.depositAmount;
+    if (remaining > 0) {
+      const settled = confirm(`Le solde de ${formatFCFA(remaining)} a-t-il été réglé par la cliente ?`);
+      if (settled) {
+        await updateAppointment(apt.id, { status: "COMPLETED", depositAmount: apt.servicePrice, depositStatus: "RECEIVED" });
+        toast.success("Prestation marquée comme terminée, solde réglé.");
+        refresh();
+        return;
+      }
+    }
     await updateAppointment(apt.id, { status: "COMPLETED" });
     toast.success("Prestation marquée comme terminée.");
     refresh();
@@ -116,9 +126,11 @@ export default function AdminAppointmentsPage() {
                   <span className="text-sm text-ink-700">
                     Acompte {formatFCFA(apt.depositAmount)} — {apt.depositStatus === "RECEIVED" ? "reçu" : "en attente"}
                   </span>
-                  <span className="text-sm text-ink-500">
-                    Reste à payer : <strong className="text-ink-700">{formatFCFA(apt.servicePrice - apt.depositAmount)}</strong>
-                  </span>
+                  {!(apt.status === "COMPLETED" && apt.servicePrice - apt.depositAmount <= 0) && (
+                    <span className="text-sm text-ink-500">
+                      Reste à payer : <strong className="text-ink-700">{formatFCFA(apt.servicePrice - apt.depositAmount)}</strong>
+                    </span>
+                  )}
                   <div className="flex gap-2">
                     {apt.status === "PENDING" && (
                       <Button onClick={() => markDepositReceived(apt)} variant="outline" size="sm">Acompte reçu</Button>
